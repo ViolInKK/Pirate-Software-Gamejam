@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfad8qvcobb5s"]
+
+[ext_resource type="Texture2D" uid="uid://ct4mrle4oecel" path="res://icon.svg" id="1_ubran"]
+[ext_resource type="Script" path="res://scenes/player/hook.gd" id="1_uqf6o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4jntt"]
+size = Vector2(13.5, 13)
+
+[node name="Hook" type="Node2D"]
+script = ExtResource("1_uqf6o")
+
+[node name="Links" type="Sprite2D" parent="."]
+texture_repeat = 2
+scale = Vector2(0.121439, 0.303682)
+texture = ExtResource("1_ubran")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 125, 0)
+region_filter_clip_enabled = true
+
+[node name="Tip" type="CharacterBody2D" parent="."]
+collision_layer = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Tip"]
+scale = Vector2(0.109375, 0.109375)
+texture = ExtResource("1_ubran")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tip"]
+shape = SubResource("RectangleShape2D_4jntt")

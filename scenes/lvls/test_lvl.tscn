@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://dilhxc07axdjj"]
+
+[ext_resource type="PackedScene" uid="uid://c2hxdnot1llb6" path="res://scenes/player/player.tscn" id="1_ak1gj"]
+[ext_resource type="Texture2D" uid="uid://ct4mrle4oecel" path="res://icon.svg" id="2_qo8in"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j3akn"]
+size = Vector2(641, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6vedl"]
+size = Vector2(121, 117.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h52qc"]
+size = Vector2(216, 29)
+
+[node name="TestLvl" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_ak1gj")]
+position = Vector2(125, 112)
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="Floor" type="Node2D" parent="."]
+position = Vector2(10, 242)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Floor"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor/StaticBody2D"]
+position = Vector2(310.5, 0)
+shape = SubResource("RectangleShape2D_j3akn")
+
+[node name="Sprite2D" type="Sprite2D" parent="Floor"]
+position = Vector2(311, -9.53674e-07)
+scale = Vector2(5.01563, 0.15625)
+texture = ExtResource("2_qo8in")
+
+[node name="Wall" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Wall"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall/StaticBody2D"]
+position = Vector2(576.5, 167.25)
+shape = SubResource("RectangleShape2D_6vedl")
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall"]
+position = Vector2(577, 169)
+texture = ExtResource("2_qo8in")
+
+[node name="Celling" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Celling"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Celling/StaticBody2D"]
+position = Vector2(379, 25.5)
+shape = SubResource("RectangleShape2D_h52qc")
+
+[node name="Sprite2D" type="Sprite2D" parent="Celling"]
+position = Vector2(379, 26)
+scale = Vector2(1.70313, 0.242188)
+texture = ExtResource("2_qo8in")
