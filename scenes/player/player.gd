@@ -1,43 +1,87 @@
 extends RigidBody2D
 
-const ACCELERATION: int = 100	
-const CHAIN_PULL = 1005
-const MOVE_SPEED = 500	
+signal player_shot(direction: Vector2, position: Vector2)
+signal touched_top_tile(tile_pos: Vector2i)
+signal touched_right_tile(tile_pos: Vector2i)
+signal touched_bottom_tile(tile_pos: Vector2i)
+signal touched_left_tile(tile_pos: Vector2i)
+
+const ACCELERATION: int = 2
+const CHAIN_PULL: int = 1005	
+
+enum tileset_direction_ids{
+	IS_TOP_PAINTABLE = 0,
+	IS_RIGHT_PAINTABLE = 2,
+	IS_BOTTOM_PAINTABLE = 4,
+	IS_LEFT_PAINTABLE = 6,
+}
 
 var chain_velocity := Vector2(0,0)
-
-func is_on_floor() -> bool:
-	if $Area2D.has_overlapping_bodies():
-		return true
-	return false
+var can_shoot: bool = true
 
 func handle_movement(state: PhysicsDirectBodyState2D) -> void:
 	var direction: Vector2 = Input.get_vector("left", "right", "up", "down")
-	var grounded = is_on_floor()
-	var walk = (Input.get_action_strength("right") - Input.get_action_strength("left")) * MOVE_SPEED
 	if $Hook.is_hooked:
-		chain_velocity = to_local($Hook.tip).normalized() * CHAIN_PULL
+		chain_velocity = (position - $Hook.tip).normalized() * CHAIN_PULL * -1
+		#Reduce pull down
 		if chain_velocity.y > 0:
-			chain_velocity.y *= 0.55
+			chain_velocity.y *= 0.2
+		#Increase pull up
 		else:
-			chain_velocity.y *= 1.65
-		if sign(chain_velocity.x) != sign(walk):
-			chain_velocity.x *= 0.7
-		state.apply_force(chain_velocity)
-	else:
-		state.apply_force(direction * ACCELERATION)
+			chain_velocity.y *= 2.3
+		#if move opposite of hook direction
+		#TODO: abomination if check
+		if sign(chain_velocity.x) == 1 and sign(direction.x) == -1 or sign(chain_velocity.x) == -1 and sign(direction.x) == 1:
+			chain_velocity.x *= 0.5
+		state.apply_central_force(chain_velocity)
+	state.apply_central_impulse(direction * ACCELERATION)
 		
-
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	handle_movement(state)
 
 func _input(event: InputEvent) -> void:
+	var player_direction = (get_global_mouse_position() - position).normalized()
 	if event is InputEventMouseButton:
-		if event.pressed:
+		if event.pressed and event.button_index == 1:
 			$Hook.shoot(get_global_mouse_position() - position)
 		else:
 			$Hook.release()
+		if event.pressed and event.button_index == 2 and can_shoot:
+			player_shot.emit(player_direction, position)
+			can_shoot = false
+			$Reload.start()
 
+func _on_reload_timeout() -> void:
+	can_shoot = true
 
-func _process(delta: float) -> void:
-	print(to_local($Hook.tip).normalized())
+func process_tilemap_collision(body, body_rid, is_direction_paintable: int):
+	if body is TileMap:
+		var current_tilemap = body
+		var collided_tile_cords = current_tilemap.get_coords_for_body_rid(body_rid)
+		var tile_data: TileData = current_tilemap.get_cell_tile_data(0, collided_tile_cords)
+		if !tile_data is TileData:
+			return
+		if tile_data.get_custom_data_by_layer_id(is_direction_paintable) and !tile_data.get_custom_data_by_layer_id(is_direction_paintable + 1):
+			return collided_tile_cords
+
+func _on_top_detector_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+	var collided_tile_cords = process_tilemap_collision(body, body_rid, tileset_direction_ids["IS_TOP_PAINTABLE"])
+	if collided_tile_cords:
+		touched_top_tile.emit(collided_tile_cords)
+
+func _on_right_detector_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+	var collided_tile_cords = process_tilemap_collision(body, body_rid, tileset_direction_ids["IS_RIGHT_PAINTABLE"])
+	if collided_tile_cords:
+		touched_right_tile.emit(collided_tile_cords)
+
+func _on_bottom_detector_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+	var collided_tile_cords = process_tilemap_collision(body, body_rid, tileset_direction_ids["IS_BOTTOM_PAINTABLE"])
+	if collided_tile_cords:
+		touched_bottom_tile.emit(collided_tile_cords)
+
+func _on_left_detector_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+	var collided_tile_cords = process_tilemap_collision(body, body_rid, tileset_direction_ids["IS_LEFT_PAINTABLE"])
+	if collided_tile_cords:
+		touched_left_tile.emit(collided_tile_cords)
+	
+	

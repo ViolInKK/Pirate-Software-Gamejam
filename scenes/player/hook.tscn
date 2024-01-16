@@ -8,6 +8,7 @@ size = Vector2(13.5, 13)
 
 [node name="Hook" type="Node2D"]
 script = ExtResource("1_uqf6o")
+metadata/_edit_group_ = true
 
 [node name="Links" type="Sprite2D" parent="."]
 texture_repeat = 2
@@ -27,3 +28,8 @@ texture = ExtResource("1_ubran")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tip"]
 shape = SubResource("RectangleShape2D_4jntt")
+
+[node name="Despawn" type="Timer" parent="."]
+wait_time = 0.35
+
+[connection signal="timeout" from="Despawn" to="." method="_on_despawn_timeout"]
