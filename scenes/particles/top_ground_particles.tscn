@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://b313ni2gjqqe6"]
+
+[node name="top_ground_particles" type="Node2D"]

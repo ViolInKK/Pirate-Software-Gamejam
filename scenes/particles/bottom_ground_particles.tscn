@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://dmtl4qvkqlmil"]
+
+[node name="bottom_ground_particles" type="Node2D"]
