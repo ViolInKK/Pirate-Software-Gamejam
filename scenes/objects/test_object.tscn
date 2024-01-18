@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dbg6iinb4te25"]
+
+[node name="test_object" type="StaticBody2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-1, -2, 185, 0, 185, -74)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(1, 1, 1, 0.227451)
+polygon = PackedVector2Array(-2, -1, 185, -74, 185, 0)

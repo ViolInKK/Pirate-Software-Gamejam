@@ -46,10 +46,7 @@ func _input(event: InputEvent) -> void:
 			$Hook.shoot(get_global_mouse_position() - position)
 		else:
 			$Hook.release()
-		if event.pressed and event.button_index == 2 and can_shoot:
-			player_shot.emit(player_direction, position)
-			can_shoot = false
-			$Reload.start()
+			
 
 func _on_reload_timeout() -> void:
 	can_shoot = true
@@ -63,25 +60,29 @@ func process_tilemap_collision(body, body_rid, is_direction_paintable: int):
 			return
 		if tile_data.get_custom_data_by_layer_id(is_direction_paintable) and !tile_data.get_custom_data_by_layer_id(is_direction_paintable + 1):
 			return collided_tile_cords
-
-func _on_top_detector_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+			
+func _on_top_detector_body_shape_entered(body_rid, body, _body_shape_index, _local_shape_index):
 	var collided_tile_cords = process_tilemap_collision(body, body_rid, tileset_direction_ids["IS_TOP_PAINTABLE"])
 	if collided_tile_cords:
 		touched_top_tile.emit(collided_tile_cords)
 
-func _on_right_detector_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+func _on_right_detector_body_shape_entered(body_rid, body, _body_shape_index, _local_shape_index):
 	var collided_tile_cords = process_tilemap_collision(body, body_rid, tileset_direction_ids["IS_RIGHT_PAINTABLE"])
 	if collided_tile_cords:
 		touched_right_tile.emit(collided_tile_cords)
 
-func _on_bottom_detector_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+func _on_bottom_detector_body_shape_entered(body_rid, body, _body_shape_index, _local_shape_index):
 	var collided_tile_cords = process_tilemap_collision(body, body_rid, tileset_direction_ids["IS_BOTTOM_PAINTABLE"])
 	if collided_tile_cords:
 		touched_bottom_tile.emit(collided_tile_cords)
 
-func _on_left_detector_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+func _on_left_detector_body_shape_entered(body_rid, body, _body_shape_index, _local_shape_index):
 	var collided_tile_cords = process_tilemap_collision(body, body_rid, tileset_direction_ids["IS_LEFT_PAINTABLE"])
 	if collided_tile_cords:
 		touched_left_tile.emit(collided_tile_cords)
 	
-	
+func _process(_delta):
+	if Input.is_action_pressed("secondary action") and can_shoot:
+		player_shot.emit((get_global_mouse_position() - position).normalized(), position)
+		can_shoot = false
+		$Reload.start()

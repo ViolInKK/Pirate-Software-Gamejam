@@ -1,27 +1,28 @@
-[gd_scene load_steps=7 format=3 uid="uid://b1xhw1nnye1dy"]
+[gd_scene load_steps=7 format=3 uid="uid://bdlkm5rrw5lnr"]
 
-[sub_resource type="Curve" id="Curve_wmiaq"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.990867, 0), 0.0, 0.0, 0, 0]
+[sub_resource type="Curve" id="Curve_pjr70"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_q70mk"]
-curve = SubResource("Curve_wmiaq")
+[sub_resource type="CurveTexture" id="CurveTexture_5bfci"]
+curve = SubResource("Curve_pjr70")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0vlgp"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5uq3o"]
 emission_shape = 1
 emission_sphere_radius = 10.0
 particle_flag_disable_z = true
-direction = Vector3(0, -1, 0)
+direction = Vector3(-1, 0, 0)
 spread = 71.0
 gravity = Vector3(0, 0, 0)
 initial_velocity_min = 50.0
 initial_velocity_max = 100.0
 orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
-scale_max = 3.0
-scale_curve = SubResource("CurveTexture_q70mk")
+scale_min = 3.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_5bfci")
 
-[sub_resource type="Animation" id="Animation_fo37r"]
+[sub_resource type="Animation" id="Animation_2byio"]
 resource_name = "default"
 length = 2.0
 tracks/0/type = "value"
@@ -51,7 +52,7 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_m5a20"]
+[sub_resource type="Animation" id="Animation_6ycfh"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -66,21 +67,21 @@ tracks/0/keys = {
 "values": [false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ntmov"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iutda"]
 _data = {
-"RESET": SubResource("Animation_m5a20"),
-"default": SubResource("Animation_fo37r")
+"RESET": SubResource("Animation_6ycfh"),
+"default": SubResource("Animation_2byio")
 }
 
 [node name="left_ground_particles" type="GPUParticles2D"]
 emitting = false
 amount = 64
-process_material = SubResource("ParticleProcessMaterial_0vlgp")
+process_material = SubResource("ParticleProcessMaterial_5uq3o")
 lifetime = 0.5
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "default"
 libraries = {
-"": SubResource("AnimationLibrary_ntmov")
+"": SubResource("AnimationLibrary_iutda")
 }
