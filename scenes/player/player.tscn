@@ -9,7 +9,7 @@ friction = 0.5
 bounce = 0.5
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1lvod"]
-radius = 29.0
+radius = 31.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yt85s"]
 radius = 31.0
@@ -34,7 +34,7 @@ script = ExtResource("1_3vw3c")
 [node name="Hook" parent="." instance=ExtResource("3_t4t8f")]
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
-scale = Vector2(0.512695, 0.512695)
+scale = Vector2(0.6, 0.6)
 texture = ExtResource("2_d0ie5")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
@@ -43,7 +43,6 @@ shape = SubResource("CircleShape2D_1lvod")
 metadata/_edit_lock_ = true
 
 [node name="Reload" type="Timer" parent="."]
-wait_time = 0.2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)

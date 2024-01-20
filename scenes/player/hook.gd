@@ -13,7 +13,7 @@ var can_shoot = true
 func shoot(dir: Vector2) -> void:
 	if can_shoot:
 		can_shoot = false
-		direction = dir.normalized()	
+		direction = dir
 		is_flying = true
 		tip = self.global_position	
 		$Despawn.start()

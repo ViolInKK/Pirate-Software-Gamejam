@@ -1,4 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://b1xhw1nnye1dy"]
+[gd_scene load_steps=8 format=3 uid="uid://b1xhw1nnye1dy"]
+
+[ext_resource type="Texture2D" uid="uid://bei4s2mpynomy" path="res://assets/player/projectile_particle.png" id="1_5m4xh"]
 
 [sub_resource type="Curve" id="Curve_aaasj"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -17,8 +19,8 @@ initial_velocity_min = 50.0
 initial_velocity_max = 100.0
 orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
-scale_min = 3.0
-scale_max = 4.0
+scale_min = 0.1
+scale_max = 0.3
 scale_curve = SubResource("CurveTexture_whovo")
 
 [sub_resource type="Animation" id="Animation_m5a20"]
@@ -87,10 +89,10 @@ _data = {
 }
 
 [node name="right_ground_particles" type="GPUParticles2D"]
-emitting = false
-amount = 64
+amount = 16
 process_material = SubResource("ParticleProcessMaterial_jng5j")
-lifetime = 0.5
+texture = ExtResource("1_5m4xh")
+lifetime = 0.4
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

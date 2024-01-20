@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://cy7blagolp2m3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gw1y7"]
+font_size = 32
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ix2ud"]
+font_size = 32
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="Time" type="Label" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "TIME"
+label_settings = SubResource("LabelSettings_gw1y7")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Score" type="Label" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "TEST"
+label_settings = SubResource("LabelSettings_ix2ud")
+horizontal_alignment = 1
+vertical_alignment = 1

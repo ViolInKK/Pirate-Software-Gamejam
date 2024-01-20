@@ -30,7 +30,7 @@ func handle_movement(state: PhysicsDirectBodyState2D) -> void:
 		else:
 			chain_velocity.y *= 2.3
 		#if move opposite of hook direction
-		#TODO: abomination if check
+		#TODO: fix this abomination if check
 		if sign(chain_velocity.x) == 1 and sign(direction.x) == -1 or sign(chain_velocity.x) == -1 and sign(direction.x) == 1:
 			chain_velocity.x *= 0.5
 		state.apply_central_force(chain_velocity)
@@ -43,7 +43,7 @@ func _input(event: InputEvent) -> void:
 	var player_direction = (get_global_mouse_position() - position).normalized()
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == 1:
-			$Hook.shoot(get_global_mouse_position() - position)
+			$Hook.shoot(player_direction)
 		else:
 			$Hook.release()
 			

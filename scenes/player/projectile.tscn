@@ -1,25 +1,24 @@
 [gd_scene load_steps=4 format=3 uid="uid://cqrbye0gr44rx"]
 
-[ext_resource type="Texture2D" uid="uid://ct4mrle4oecel" path="res://icon.svg" id="1_dqg4y"]
 [ext_resource type="Script" path="res://scenes/player/projectile.gd" id="1_uw2mp"]
+[ext_resource type="Texture2D" uid="uid://lsbrdrgeadfq" path="res://assets/player/projectile.png" id="2_qvfmg"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vqie8"]
-size = Vector2(28, 28)
+[sub_resource type="CircleShape2D" id="CircleShape2D_wrwbf"]
+radius = 16.0
 
 [node name="projectile" type="Area2D"]
 position = Vector2(11, -9)
 collision_layer = 8
 script = ExtResource("1_uw2mp")
-metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-9, 9)
-scale = Vector2(0.234375, 0.234375)
-texture = ExtResource("1_dqg4y")
+position = Vector2(-9, 8)
+scale = Vector2(0.757813, 0.757813)
+texture = ExtResource("2_qvfmg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-9, 9)
-shape = SubResource("RectangleShape2D_vqie8")
+shape = SubResource("CircleShape2D_wrwbf")
 
 [node name="Despawn" type="Timer" parent="."]
 wait_time = 2.0

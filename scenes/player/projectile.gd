@@ -24,17 +24,9 @@ func process_tilemap_collision(body, body_rid):
 		paintable_directions.push_back(is_direction_painatble)
 	return paintable_directions
 		
-
 func _on_body_shape_entered(body_rid, body, _body_shape_index, _local_shape_index):
 	if body is TileMap:
 		var paintable_directions = process_tilemap_collision(body, body_rid)
 		var tile_cords = body.get_coords_for_body_rid(body_rid)
 		paint_tile.emit(paintable_directions, tile_cords)
 	queue_free()
-	
-	
-	
-#func _on_top_detector_body_shape_entered(body_rid, body, _body_shape_index, _local_shape_index):
-	#var collided_tile_cords = process_tilemap_collision(body, body_rid, tileset_direction_ids["IS_TOP_PAINTABLE"])
-	#if collided_tile_cords:
-		#touched_top_tile.emit(collided_tile_cords)

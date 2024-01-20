@@ -1,4 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdlkm5rrw5lnr"]
+[gd_scene load_steps=8 format=3 uid="uid://bdlkm5rrw5lnr"]
+
+[ext_resource type="Texture2D" uid="uid://bei4s2mpynomy" path="res://assets/player/projectile_particle.png" id="1_7t8n2"]
 
 [sub_resource type="Curve" id="Curve_pjr70"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -18,9 +20,24 @@ initial_velocity_min = 50.0
 initial_velocity_max = 100.0
 orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
-scale_min = 3.0
-scale_max = 4.0
+scale_min = 0.1
+scale_max = 0.3
 scale_curve = SubResource("CurveTexture_5bfci")
+
+[sub_resource type="Animation" id="Animation_6ycfh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_2byio"]
 resource_name = "default"
@@ -52,21 +69,6 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_6ycfh"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:emitting")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_iutda"]
 _data = {
 "RESET": SubResource("Animation_6ycfh"),
@@ -75,9 +77,10 @@ _data = {
 
 [node name="left_ground_particles" type="GPUParticles2D"]
 emitting = false
-amount = 64
+amount = 16
 process_material = SubResource("ParticleProcessMaterial_5uq3o")
-lifetime = 0.5
+texture = ExtResource("1_7t8n2")
+lifetime = 0.4
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
