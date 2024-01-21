@@ -14,8 +14,8 @@ func shoot(dir: Vector2) -> void:
 	if can_shoot:
 		can_shoot = false
 		direction = dir
-		is_flying = true
 		tip = self.global_position	
+		is_flying = true
 		$Despawn.start()
 		$Reload.start()
 
@@ -25,10 +25,10 @@ func release() -> void:
 
 func _process(_delta: float) -> void:
 	self.visible = is_flying or is_hooked
-	if not is_flying:
-		$Despawn.stop()
 	if not self.visible:
 		return
+	if not is_flying:
+		$Despawn.stop()
 	var tip_loc = to_local(tip)
 	links.rotation = self.position.angle_to_point(tip_loc) - deg_to_rad(90)
 	$Tip.rotation = self.position.angle_to_point(tip_loc) - deg_to_rad(90)

@@ -14,7 +14,7 @@ var bottom_ghround_particle: PackedScene = preload("res://scenes/particles/botto
 var left_ground_particle: PackedScene = preload("res://scenes/particles/left_ground_particles.tscn")
 var projectile_explosion_particles: PackedScene = preload("res://scenes/particles/projectile_explosion_particle.tscn")
 
-var seconds: int = 8
+var seconds: int = 300
 
 func _ready():
 	$UI/Time.text = str(seconds)
@@ -48,7 +48,7 @@ func on_projectione_touched_tile(paintable_directions: Array[bool], tile_cords: 
 		
 func _on_player_touched_top_tile(tile_pos):
 	var tile_data = $TileMap.get_cell_tile_data(TILESET_DIRECTION_LAYERS[0], tile_pos)
-	if not tile_data:
+	if not tile_data: #if side is not painted
 		Globals.score += SCORE_ADDITION	
 		$TileMap.set_cell(TILESET_DIRECTION_LAYERS[0], tile_pos, 0, TRAIL_ATLAS_CORDS[0])
 		update_score()		

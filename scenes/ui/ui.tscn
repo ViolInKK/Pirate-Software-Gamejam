@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cy7blagolp2m3"]
+[gd_scene load_steps=4 format=3 uid="uid://cy7blagolp2m3"]
+
+[ext_resource type="FontFile" uid="uid://cm6v20yjr5qbw" path="res://assets/font.TTF" id="1_apup6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_gw1y7"]
 font_size = 32
@@ -17,6 +19,7 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 23.0
 grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_apup6")
 text = "TIME"
 label_settings = SubResource("LabelSettings_gw1y7")
 horizontal_alignment = 1
@@ -31,6 +34,7 @@ anchor_bottom = 1.0
 offset_top = -23.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_apup6")
 text = "TEST"
 label_settings = SubResource("LabelSettings_ix2ud")
 horizontal_alignment = 1
