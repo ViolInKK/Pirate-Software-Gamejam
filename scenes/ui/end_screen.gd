@@ -5,4 +5,4 @@ func _ready():
 	
 func _on_retry_pressed():
 		Globals.score = 0
-		get_tree().change_scene_to_file("res://scenes/lvls/test_lvl.tscn")
+		get_tree().change_scene_to_file("res://scenes/lvls/lvl.tscn")

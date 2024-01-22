@@ -3,12 +3,12 @@
 [ext_resource type="FontFile" uid="uid://cm6v20yjr5qbw" path="res://assets/font.TTF" id="1_apup6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_gw1y7"]
-font_size = 32
+font_size = 48
 outline_size = 5
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ix2ud"]
-font_size = 32
+font_size = 48
 outline_size = 5
 outline_color = Color(0, 0, 0, 1)
 
@@ -35,7 +35,7 @@ offset_top = -23.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("1_apup6")
-text = "TEST"
+text = "SCORE"
 label_settings = SubResource("LabelSettings_ix2ud")
 horizontal_alignment = 1
 vertical_alignment = 1

@@ -14,7 +14,7 @@ var bottom_ghround_particle: PackedScene = preload("res://scenes/particles/botto
 var left_ground_particle: PackedScene = preload("res://scenes/particles/left_ground_particles.tscn")
 var projectile_explosion_particles: PackedScene = preload("res://scenes/particles/projectile_explosion_particle.tscn")
 
-var seconds: int = 300
+var seconds: int = 60
 
 func _ready():
 	$UI/Time.text = str(seconds)
